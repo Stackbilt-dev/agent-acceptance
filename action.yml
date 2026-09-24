@@ -1,0 +1,25 @@
+name: Agent Acceptance
+description: Check an AI agent's pull request against the acceptance contract in the issue it closes. Re-runs the tests itself; never trusts the agent's summary.
+author: Stackbilt
+branding:
+  icon: check-square
+  color: orange
+inputs:
+  github-token:
+    description: Token used to read the linked issue. The default read-only token is enough.
+    default: ${{ github.token }}
+  require-contract:
+    description: Fail PRs that close no issue with a trusted acceptance contract.
+    default: 'false'
+  trusted-associations:
+    description: Comma-separated author associations whose issue contracts are honored.
+    default: OWNER,MEMBER,COLLABORATOR
+  working-directory:
+    description: Repository checkout to inspect. Defaults to the workspace.
+    default: ''
+outputs:
+  status:
+    description: passed, failed, or unchecked.
+runs:
+  using: node24
+  main: dist/index.js
