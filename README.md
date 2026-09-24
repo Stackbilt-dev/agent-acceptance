@@ -33,6 +33,8 @@ Coding agents report success they didn't achieve. One of ours opened a PR saying
 
 4. The result goes to the job summary, and the check fails if any contract item fails.
 
+This is live output from [stackbilt-admin/fork-canary](https://github.com/stackbilt-admin/fork-canary), where [issue #2](https://github.com/stackbilt-admin/fork-canary/issues/2) holds the contract. [PR #3](https://github.com/stackbilt-admin/fork-canary/pull/3) passes. [PR #4](https://github.com/stackbilt-admin/fork-canary/pull/4) makes the same fix plus a README edit, and fails on `changed_files_only — unexpected changes: README.md`.
+
 ```text
 Acceptance: 6/6 checks passed (re-run by the checker, not reported by the author).
 
@@ -128,6 +130,7 @@ if (parsed.kind === 'spec') {
 
 - It doesn't judge whether the tests are *good*. It proves scope, content and test counts, so a reviewer starts from verified facts instead of the agent's summary. Review is still review.
 - vitest is the only test runner for now.
+- PRs opened from forks: in our first test, a PR from a fork in another organization did not trigger `pull_request` workflows at all ([fork-canary#1](https://github.com/stackbilt-admin/fork-canary/pull/1)). Same-repository PRs work. We are investigating.
 
 ## License
 
