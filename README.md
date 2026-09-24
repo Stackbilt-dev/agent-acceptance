@@ -35,6 +35,8 @@ Coding agents report success they didn't achieve. One of ours opened a PR saying
 
 This is live output from [stackbilt-admin/fork-canary](https://github.com/stackbilt-admin/fork-canary), where [issue #2](https://github.com/stackbilt-admin/fork-canary/issues/2) holds the contract. [PR #3](https://github.com/stackbilt-admin/fork-canary/pull/3) passes. [PR #4](https://github.com/stackbilt-admin/fork-canary/pull/4) makes the same fix plus a README edit, and fails on `changed_files_only — unexpected changes: README.md`.
 
+PRs from forks work too. [PR #1](https://github.com/stackbilt-admin/fork-canary/pull/1) was opened by the AEGIS executor from a fork in another organization. The Action checked it independently of AEGIS and passed it 6/6.
+
 ```text
 Acceptance: 6/6 checks passed (re-run by the checker, not reported by the author).
 
@@ -130,7 +132,7 @@ if (parsed.kind === 'spec') {
 
 - It doesn't judge whether the tests are *good*. It proves scope, content and test counts, so a reviewer starts from verified facts instead of the agent's summary. Review is still review.
 - vitest is the only test runner for now.
-- PRs opened from forks: in our first test, a PR from a fork in another organization did not trigger `pull_request` workflows at all ([fork-canary#1](https://github.com/stackbilt-admin/fork-canary/pull/1)). Same-repository PRs work. We are investigating.
+- It doesn't run on PRs that predate the workflow until they get a new push. GitHub runs `pull_request` workflows from the PR's merge commit, and editing, closing or reopening the PR doesn't refresh it.
 
 ## License
 
